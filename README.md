@@ -67,3 +67,81 @@ void transmitCameraData(char data) {
   // Transmit camera data wirelessly
   // Code to transmit camera data wirelessly (e.g., using RF module)
 }
+
+// Receiver (Boat) Code:
+#include <SoftwareSerial.h>
+
+// Define motor control pins
+#define MOTOR1_PIN1 2
+#define MOTOR1_PIN2 3
+#define MOTOR2_PIN1 4
+#define MOTOR2_PIN2 5
+
+// Define camera pins
+#define CAMERA_TX_PIN 6
+#define CAMERA_RX_PIN 7
+
+SoftwareSerial cameraSerial(CAMERA_RX_PIN, CAMERA_TX_PIN); // RX, TX
+
+void setup() {
+  // Set motor control pins as output
+  pinMode(MOTOR1_PIN1, OUTPUT);
+  pinMode(MOTOR1_PIN2, OUTPUT);
+  pinMode(MOTOR2_PIN1, OUTPUT);
+  pinMode(MOTOR2_PIN2, OUTPUT);
+
+  // Initialize camera serial communication
+  cameraSerial.begin(9600);
+}
+
+void loop() {
+  // Receive control signals wirelessly
+  char controlSignal = receiveControl();
+
+  // Act on control signals to drive the motors
+  if (controlSignal == 'F') {
+    moveForward();
+  } else if (controlSignal == 'B') {
+    moveBackward();
+  } else if (controlSignal == 'L') {
+    turnLeft();
+  } else if (controlSignal == 'R') {
+    turnRight();
+  } else if (controlSignal == 'S') {
+    stopMoving();
+  }
+
+  // Receive camera data wirelessly
+  while (cameraSerial.available()) {
+    char c = cameraSerial.read();
+    // Display camera data on connected screen or monitor
+  }
+}
+
+char receiveControl() {
+  // Receive control signals wirelessly
+  // Code to receive control signals wirelessly (e.g., using RF module)
+}
+
+void moveForward() {
+  // Code to drive motors forward
+}
+
+void moveBackward() {
+  // Code to drive motors backward
+}
+
+void turnLeft() {
+  // Code to turn left
+}
+
+void turnRight() {
+  // Code to turn right
+}
+
+void stopMoving() {
+  // Code to stop motors
+}
+
+
+
